@@ -2,6 +2,7 @@ import React, { useRef, useCallback } from 'react';
 import { View } from 'react-native';
 import { PanGestureHandler, State } from 'react-native-gesture-handler';
 import Animated from 'react-native-reanimated';
+import TestAnimated from './src/components/TestAnimated';
 
 const {
     set,
@@ -59,6 +60,8 @@ export default function App() {
             // }).start();
         }
     }, []);
+
+    return <TestAnimated />;
 
     return (
         <View style={styles.container}>
