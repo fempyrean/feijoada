@@ -1,10 +1,19 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import {
+    Container,
+    Title,
+    SearchBar,
+    PokeballUpperRightCorner,
+} from '../../components';
 
 export default function Home() {
     return (
-        <View>
-            <Text>Home</Text>
-        </View>
+        <Container>
+            <PokeballUpperRightCorner />
+            <Title style={{ marginTop: 20, marginBottom: 15 }} size="28">
+                What Pokemon{'\n'}are you looking for?
+            </Title>
+            <SearchBar />
+        </Container>
     );
 }
