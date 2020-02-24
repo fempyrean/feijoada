@@ -3,6 +3,7 @@ import React, { useRef } from 'react';
 import styled from 'styled-components/native';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import colors from '../utils/colors';
+import { fontFaces } from './Text';
 
 const SearchBarContainer = styled.TouchableOpacity.attrs(() => ({
     activeOpacity: 0.9,
@@ -16,7 +17,9 @@ const SearchBarContainer = styled.TouchableOpacity.attrs(() => ({
     margin-vertical: 10px;
 `;
 const SearchBarInput = styled.TextInput`
-    font-size: 16px;
+    flex: 1;
+    font-size: 14px;
+    font-family: ${fontFaces.Regular};
 `;
 const SearchBarIcon = styled(Icon).attrs(() => ({
     name: 'search',

@@ -1,6 +1,6 @@
 import styled from 'styled-components/native';
 
-const fontFaces = {
+export const fontFaces = {
     Regular: 'CircularStd-Book',
     Medium: 'CircularStd-Medium',
     Bold: 'CircularStd-Bold',
