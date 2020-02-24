@@ -1,4 +1,5 @@
 import styled from 'styled-components/native';
+import colors from '../utils/colors';
 
 export const fontFaces = {
     Regular: 'CircularStd-Book',
@@ -17,4 +18,10 @@ export const Title = styled(Text).attrs(() => ({
 }))`
     font-size: ${props => props.size || '21'}px;
     line-height: 40px;
+`;
+
+export const TextLink = styled(Text).attrs(() => ({
+    font: 'Bold',
+}))`
+    color: ${colors.text.link};
 `;

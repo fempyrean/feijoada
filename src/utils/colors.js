@@ -3,6 +3,7 @@ export default {
         white: '#fff',
         black: '#000',
         lightGrey: '#f6f6f6',
+        lightGrey200: '#B0B8C7',
     },
     btn: {
         home: {
@@ -13,5 +14,8 @@ export default {
             purple: '#7b518c',
             brown: '#b0726d',
         },
+    },
+    text: {
+        link: '#8f96c8',
     },
 };
