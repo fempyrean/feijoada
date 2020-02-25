@@ -23,5 +23,6 @@ module.exports = {
     'no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
     'global-require': 'off',
     'react/jsx-props-no-spreading': 'off',
+    'react/react-props': 'off',
   },
 };
