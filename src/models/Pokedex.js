@@ -1,5 +1,8 @@
+import axios from 'axios';
+
 class Pokedex {
     constructor() {
+        this.baseUrl = 'https://pokeapi.co/api/v2/pokedex/'
         this.currentIndex = 2;
         this.indexes = {
             1: 'national',
@@ -17,18 +20,23 @@ class Pokedex {
             14: 'kalos-mountain',
             15: 'updated-hoenn',
         };
+        this.pokedexes = {};
 
         /** Array com pokedexes indexadas por nome. nome => id */
         this.indexedByName = {};
         Object.keys(this.indexes).map(key => {
             this.indexedByName[this.indexes[key]] = key;
         });
-
-        this.fetchPokedex();
     }
 
-    fetchPokedex = async () => {
-        console.log('buscar esta merda', this.currentIndex);
+    fetchPokedex = async (id = this.currentIndex) => {
+        if ( this.pokedexes[id] ) {
+            return this.pokedexes[id];
+        }
+        const data = await axios.get(`${this.baseUrl}${this.currentIndex}`);
+        this.pokedexes[data.data.id] = data.data;
+
+        return data.data;
     }
 }
 
