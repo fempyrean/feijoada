@@ -25,13 +25,13 @@ const news = {
     },
 };
 
-export default function Home() {
+export default function Home({ navigation }) {
     function renderButtons() {
         const data = {
             pokedex: {
                 title: 'Pokedex',
                 bgColor: colors.btn.home.green,
-                onPress: () => {},
+                onPress: () => navigation.navigate('Pokedex'),
             },
             moves: {
                 title: 'Moves',
@@ -94,6 +94,7 @@ export default function Home() {
             const current = news[key];
             return (
                 <News
+                    key={key}
                     title={current.title}
                     date={current.date}
                     thumb={current.source}

@@ -11,6 +11,7 @@ import {
 
 /** Importação das telas */
 import Home from '../screens/Home/Home';
+import Pokedex from '../screens/Pokedex/Pokedex';
 
 /** Criando Stack. Navigators que sejam uma stack utilizarão Stack.Navigator e Stack.Screen */
 const Stack = createStackNavigator();
@@ -28,6 +29,7 @@ export default function Routes() {
                 }}
             >
                 <Stack.Screen name="Home" component={Home} />
+                <Stack.Screen name="Pokedex" component={Pokedex} />
             </Stack.Navigator>
         </NavigationContainer>
     );
