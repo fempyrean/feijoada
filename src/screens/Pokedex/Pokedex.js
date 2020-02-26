@@ -8,6 +8,7 @@ import {
     Container,
 } from '../../components';
 import PokedexData from '../../models/Pokedex';
+import Pokemon from '../../models/Pokemon';
 
 export default function Pokedex() {
     const [loading, setLoading] = useState(true);
@@ -23,7 +24,12 @@ export default function Pokedex() {
     }, []);
 
     function renderPokemons() {
-        console.log('POKEMONS', data);
+        const { pokemon_entries } = data;
+        pokemon_entries.map(async (entry, index) => {
+            if (index === 0) {
+                const pokemon = await Pokemon.getPokemon(entry.entry_number);
+            }
+        });
     }
 
     if (loading) {
