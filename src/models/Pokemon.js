@@ -50,6 +50,18 @@ class Pokemon {
         return this.data.pokemons[pokemonId];
     }
 
+    async fetchPokedexDetails(pokedexId) {
+        const pokedexData = await this.fetchPokedex(pokedexId);
+        const pokemonsData = [];
+
+        pokedexData.pokemon_entries.map(async entry => {
+            const pokemon = await this.fetchPokemonDetails(entry.entry_number);
+            this.pokemons[entry.entry_number] = pokemon;
+            pokemonsData.push(pokemon);
+        });
+        return pokemonsData;
+    }
+
     getPokedexIndexedByRegionName() {
         return this.pokedexIndexedByRegionName;
     }

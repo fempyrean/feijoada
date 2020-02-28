@@ -25,11 +25,13 @@ export default function Pokedex() {
     }
 
     useEffect(() => {
-        async function getPokedexData() {
-            const data = await Pokemon.fetchPokedex(2);
-            getPokemonDetails(data);
-        }
-        getPokedexData();
+        // async function getPokedexData() {
+        //     const data = await Pokemon.fetchPokedex(2);
+        //     getPokemonDetails(data);
+        // }
+        // getPokedexData();
+        const x = Pokemon.fetchPokedexDetails(2);
+        console.log('AHFEIUEF', x);
     }, []);
     useEffect(() => {
         console.log('pokemons', pokemons);
@@ -56,7 +58,7 @@ export default function Pokedex() {
             <ScrollableContainer>
                 <PokeballUpperRightCorner />
                 <Title>Pokedex</Title>
-                {renderPokemons()}
+                {/* {renderPokemons()} */}
             </ScrollableContainer>
         </Container>
     );
