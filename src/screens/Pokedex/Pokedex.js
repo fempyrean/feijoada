@@ -7,28 +7,40 @@ import {
     PokeballUpperRightCorner,
     Container,
 } from '../../components';
-import PokedexData from '../../models/Pokedex';
 import Pokemon from '../../models/Pokemon';
 
 export default function Pokedex() {
     const [loading, setLoading] = useState(true);
-    const [data, setData] = useState();
+    const [pokemons, setPokemons] = useState();
+
+    function getPokemonDetails(data) {
+        const details = [];
+        data.pokemon_entries.map(async pokemon => {
+            const pokemonDetails = await Pokemon.fetchPokemonDetails(
+                pokemon.entry_number
+            );
+            details.push(pokemonDetails);
+        });
+        setPokemons(details);
+    }
 
     useEffect(() => {
         async function getPokedexData() {
-            const dataPokedex = await PokedexData.fetchPokedex();
-            setData(dataPokedex);
-            setLoading(false);
+            const data = await Pokemon.fetchPokedex(2);
+            getPokemonDetails(data);
         }
         getPokedexData();
     }, []);
+    useEffect(() => {
+        console.log('pokemons', pokemons);
+        if (pokemons && pokemons.length > 0) {
+            setLoading(false);
+        }
+    }, [pokemons]);
 
     function renderPokemons() {
-        const { pokemon_entries } = data;
-        pokemon_entries.map(async (entry, index) => {
-            if (index === 0) {
-                const pokemon = await Pokemon.getPokemon(entry.entry_number);
-            }
+        return pokemons.map(pokemon => {
+            return <Title>{pokemon.name}</Title>;
         });
     }
 
