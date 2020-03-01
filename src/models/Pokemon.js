@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 import axios from 'axios';
 
 class Pokemon {
@@ -51,15 +52,21 @@ class Pokemon {
     }
 
     async fetchPokedexDetails(pokedexId) {
+        /** Capturando pokedex */
         const pokedexData = await this.fetchPokedex(pokedexId);
-        const pokemonsData = [];
 
-        pokedexData.pokemon_entries.map(async entry => {
-            const pokemon = await this.fetchPokemonDetails(entry.entry_number);
-            this.pokemons[entry.entry_number] = pokemon;
-            pokemonsData.push(pokemon);
-        });
-        return pokemonsData;
+        /** Capturando detalhes dos pokemons da pokedex */
+        const { pokemon_entries } = pokedexData;
+        const data = [];
+
+        await Promise.all(
+            pokemon_entries.map(async entry => {
+                const pokemonId = entry.entry_number;
+                const pokemon = await this.fetchPokemonDetails(pokemonId);
+                data.push(pokemon);
+            })
+        );
+        return data;
     }
 
     getPokedexIndexedByRegionName() {
