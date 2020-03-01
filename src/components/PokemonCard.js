@@ -28,12 +28,30 @@ const PokemonTypeContainer = styled.View`
 `;
 const PokemonTpyeText = styled(Text).attrs(() => ({}))``;
 
-const PokemonType = ({ type }) => {
-    return (
-        <PokemonTypeContainer>
-            <PokemonTpyeText>{type}</PokemonTpyeText>
-        </PokemonTypeContainer>
-    );
+const PokemonType = ({ types }) => {
+    function renderTypes() {
+        const typesToRender = [];
+        let primaryColor = null;
+
+        types.map(type => {
+            if (type.slot === 1) {
+                primaryColor =
+                    typesColors[type.type.name] || typesColors.default;
+            }
+        });
+
+        types.map(type => {
+            typesToRender.push(
+                <PokemonTypeContainer background={primaryColor}>
+                    <PokemonTpyeText>{type.type.name}</PokemonTpyeText>
+                </PokemonTypeContainer>
+            );
+        });
+
+        return typesToRender;
+    }
+
+    return renderTypes();
 };
 
 export const PokemonCard = ({ pokemon }) => {
@@ -49,19 +67,12 @@ export const PokemonCard = ({ pokemon }) => {
         return bgColor;
     }
 
-    function renderTypes() {
-        return types.map(type => {
-            return <PokemonType type={type.type.name} />;
-        });
-    }
-
-    console.log('pokemon', pokemon);
     return (
         <PokemonCardContainer background={getBackgroundColor()}>
             <PokemonName>
                 {name.charAt(0).toUpperCase() + name.substr(1)}
             </PokemonName>
-            {renderTypes()}
+            <PokemonType types={types} />
         </PokemonCardContainer>
     );
 };
