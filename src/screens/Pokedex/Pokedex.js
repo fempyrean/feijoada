@@ -6,6 +6,7 @@ import {
     Title,
     PokeballUpperRightCorner,
     Container,
+    PokemonCard,
 } from '../../components';
 import Pokemon from '../../models/Pokemon';
 
@@ -13,25 +14,12 @@ export default function Pokedex() {
     const [loading, setLoading] = useState(true);
     const [pokemons, setPokemons] = useState();
 
-    function getPokemonDetails(data) {
-        const details = [];
-        data.pokemon_entries.map(async pokemon => {
-            const pokemonDetails = await Pokemon.fetchPokemonDetails(
-                pokemon.entry_number
-            );
-            details.push(pokemonDetails);
-        });
-        setPokemons(details);
-    }
-
     useEffect(() => {
-        // async function getPokedexData() {
-        //     const data = await Pokemon.fetchPokedex(2);
-        //     getPokemonDetails(data);
-        // }
-        // getPokedexData();
-        const x = Pokemon.fetchPokedexDetails(2);
-        console.log('AHFEIUEF', x);
+        async function getPokedex() {
+            const data = await Pokemon.fetchPokedexDetails(2);
+            setPokemons(data);
+        }
+        getPokedex();
     }, []);
     useEffect(() => {
         console.log('pokemons', pokemons);
@@ -42,7 +30,7 @@ export default function Pokedex() {
 
     function renderPokemons() {
         return pokemons.map(pokemon => {
-            return <Title>{pokemon.name}</Title>;
+            return <PokemonCard key={pokemon.name} pokemon={pokemon} />;
         });
     }
 
@@ -54,12 +42,10 @@ export default function Pokedex() {
         );
     }
     return (
-        <Container>
-            <ScrollableContainer>
-                <PokeballUpperRightCorner />
-                <Title>Pokedex</Title>
-                {/* {renderPokemons()} */}
-            </ScrollableContainer>
-        </Container>
+        <ScrollableContainer>
+            <PokeballUpperRightCorner />
+            <Title>Pokedex</Title>
+            {renderPokemons()}
+        </ScrollableContainer>
     );
 }
