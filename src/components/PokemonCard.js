@@ -18,7 +18,10 @@ const PokemonCardContainer = styled.TouchableOpacity`
     width: ${DEVICE_WIDTH / 2 - 30}px;
     background: ${props => props.background || 'green'};
     margin-vertical: 5px;
+    flex-direction: row;
 `;
+
+const Container = styled.View``;
 
 const PokemonName = styled(Text).attrs(() => ({}))``;
 
@@ -54,7 +57,16 @@ const PokemonType = ({ types }) => {
     return renderTypes();
 };
 
+const PokemonSprite = styled.Image.attrs(props => ({
+    source: props.source,
+    resizeMode: 'contain',
+}))`
+    width: 80px;
+    height: 100px;
+`;
+
 export const PokemonCard = ({ pokemon }) => {
+    console.log(pokemon);
     const { types, name } = pokemon;
 
     function getBackgroundColor() {
@@ -69,10 +81,19 @@ export const PokemonCard = ({ pokemon }) => {
 
     return (
         <PokemonCardContainer background={getBackgroundColor()}>
-            <PokemonName>
-                {name.charAt(0).toUpperCase() + name.substr(1)}
-            </PokemonName>
-            <PokemonType types={types} />
+            <Container>
+                <PokemonName>
+                    {name.charAt(0).toUpperCase() + name.substr(1)}
+                </PokemonName>
+                <PokemonType types={types} />
+            </Container>
+            <Container>
+                <PokemonSprite
+                    source={{
+                        uri: pokemon.sprites.front_default,
+                    }}
+                />
+            </Container>
         </PokemonCardContainer>
     );
 };
